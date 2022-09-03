@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load static %}
+<!--{% comment %} TODO: 5. base.html 템플릿을 만들어 모든 페이지에서 상속받아 보여주세요 {% endcomment %}-->
+
+{% block content %}
+<div class="main-content">
+  <!-- Header -->
+  <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
+    <div class="container">
+      <div class="header-body text-center mb-7">
+        <div class="row justify-content-center">
+          <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+            <h1 class="text-white">로그인</h1>
+            <p class="text-lead text-white">Final Project에 오신것을 환영합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="separator separator-bottom separator-skew zindex-100">
+      <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+      </svg>
+    </div>
+  </div>
+  <!-- Page content -->
+  <div class="container mt--9 pb-5 text-gray">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-md-7">
+        <div class="card bg-secondary border border-soft mb-0">
+          <div class="card-header bg-transparent pb-5">
+            <div class="text-center mt-2 mb-3"><small>소셜로 로그인 하기</small></div>
+            <div class="btn-wrapper text-center">
+              <a href="#" class="btn btn-neutral btn-icon">
+                <span class="btn-inner--icon"><img src="{% static 'assets/img/icons/common/github.svg' %}"></span>
+                <span class="btn-inner--text">Github</span>
+              </a>
+              <a href="#" class="btn btn-neutral btn-icon">
+                <span class="btn-inner--icon"><img src="{% static 'assets/img/icons/common/google.svg' %}"></span>
+                <span class="btn-inner--text">Google</span>
+              </a>
+            </div>
+          </div>
+          <div class="card-body px-lg-5 py-lg-5">
+            <div class="text-center mb-4">
+              <small>ID/PW 로그인</small>
+            </div>
+            {% if msg %}
+            <p class="text-center text-sm text-danger">{{ msg }}</p>
+            {% endif %}
+            {% if is_ok or user.is_authenticated %}
+            <p class="text-center text-sm text-success">로그인 성공({{ user.username }}) <a class="text-primary" href="{% url 'logout' %}">로그아웃</a></p>
+            {% endif %}
+            <form method="post">
+              {% csrf_token %}
+              <div class="form-group mb-3">
+                <div class="input-group input-group-merge input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-user-run"></i></span>
+                  </div>
+                  {{ form.username }}
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group input-group-merge input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                  </div>
+                  {{ form.password }}
+                </div>
+              </div>
+              <div class="custom-control custom-control-alternative custom-checkbox">
+                {{ form.remember_me }}
+                <label class="custom-control-label" for="_loginRememberMe">
+                  <span>로그인 유지하기</span>
+                </label>
+              </div>
+              
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary my-4">로그인</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-6">
+            <a href="#" class="text-gray"><small>비밀번호 찾기</small></a>
+          </div>
+          <div class="col-6 text-right">
+            <a href="#" class="text-gray"><small>회원가입</small></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+
+<!--
+<div class="container">
+      {% comment %} TODO: 1. /login로 접근하여 로그인 페이지를 통해 로그인이 되게 해주세요 {% endcomment %}
+      <div class="row mt-5">
+        <div class="col-12 text-center">
+
+          <h1>로그인</h1>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-12">
+          {{ error }}
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-12">
+          <form method="POST" action=".">
+            <div class="form-group">
+              <label for="...">...</label>
+              <input type="..." class="form-control" id="..."
+                placeholder="..." name="..." />
+            </div>
+            <button type="submit" class="btn btn-primary">로그인</button>
+          </form>
+        </div>
+      </div>
+  </div> --> 
+{% endblock %}
+
